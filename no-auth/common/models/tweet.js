@@ -1,3 +1,5 @@
+var Bluebird = require('bluebird')
+
 module.exports = function(Tweet) {
   Tweet.disableRemoteMethod('count', true);
   Tweet.disableRemoteMethod('exists', true);
