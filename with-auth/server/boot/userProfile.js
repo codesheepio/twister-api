@@ -1,6 +1,7 @@
 module.exports = function(app) {
   var TwisterUser = app.models.TwisterUser;
   var Follow = app.models.Follow;
+  var Tweet = app.models.Tweet;
   var findOne = TwisterUser.findOne;
 
   // Override findOne to attach numFollowers and numFollowings
@@ -22,6 +23,11 @@ module.exports = function(app) {
     })
     .then(numFollowings => {
       profile.numFollowings = numFollowings;
+
+      return Tweet.count({"username": profile.username})
+    })
+    .then(numTweets => {
+      profile.numTweets = numTweets;
 
       cb(null, profile);
     })
