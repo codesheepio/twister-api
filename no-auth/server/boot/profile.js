@@ -11,11 +11,11 @@ module.exports = function(app) {
         email: ctx.result.email,
       };
 
-      Follow.count({"followedUsername": profile.username})
+      Follow.count({"followedUsername": profile.username, "isFollowing": true})
       .then(numFollowers => {
         profile.numFollowers = numFollowers;
 
-        return Follow.count({"username": profile.username});
+        return Follow.count({"username": profile.username, "isFollowing": true});
       })
       .then(numFollowings => {
         profile.numFollowings = numFollowings;
